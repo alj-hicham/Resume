@@ -18,6 +18,7 @@ public class Generalinfo implements Serializable {
     private String title;
     @Size(max = 500)
     private String summary;
+    @NotNull
     private Long countrynumber;
 
     private Long number;
@@ -40,8 +41,7 @@ public class Generalinfo implements Serializable {
         return phonenumber;
     }
 
-    public void setPhonenumber(Long phonenumber, Long countrynumber, Long number) {
-        phonenumber = countrynumber + number;
+    public void setPhonenumber(Long phonenumber) {
         this.phonenumber = phonenumber;
     }
 

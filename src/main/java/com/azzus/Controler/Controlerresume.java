@@ -28,10 +28,14 @@ public class Controlerresume {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String addGeneralinfo(Model model, @Valid Generalinfo generalinfo, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+
             return "index";
         } else {
+
             generalinforepo.save(generalinfo);
-            return "confirm";
+
+            return "index";
         }
     }
+
 }
