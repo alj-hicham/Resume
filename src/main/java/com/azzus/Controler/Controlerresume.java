@@ -1,41 +1,56 @@
 package com.azzus.Controler;
 
-import com.azzus.Services.Generalinforepo;
+import com.azzus.Repo.GeneralinfoRepo;
 import com.azzus.domain.Generalinfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 
 @Controller
 public class Controlerresume {
-
     @Autowired
-    private Generalinforepo generalinforepo;
+    private GeneralinfoRepo generalinfoRepo;
+
+    @GetMapping
+    @RequestMapping("/index/{id}/confirm")
+    public String showbyid(@PathVariable Long id, Model model) {
+        model.addAttribute("generalinfo", generalinfoRepo.getOne(id));
 
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String formResume(Model model) {
+        return "confirm";
+    }
+
+    @GetMapping
+    @RequestMapping(value = "/form")
+    public String gettingform(Model model) {
         model.addAttribute("generalinfo", new Generalinfo());
-
         return "index";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String addGeneralinfo(Model model, @Valid Generalinfo generalinfo, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
 
+    @PostMapping
+    @RequestMapping(value = "/save")
+    public String saveorupdate(@Valid Generalinfo generalinfoo, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
             return "index";
         } else {
+            Generalinfo generalinfo = generalinfoRepo.save(generalinfoo);
 
-            generalinforepo.save(generalinfo);
-
-            return "index";
+            return "redirect:/index/" + generalinfo.getGeneral_id() + "/confirm";
         }
     }
 
+    @PostMapping(value = "/confirm")
+    public String confirming(Generalinfo generalinfo) {
+        generalinfoRepo.save(generalinfo);
+        return "yourcv";
+    }
 }
