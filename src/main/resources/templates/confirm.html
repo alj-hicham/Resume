@@ -9,71 +9,100 @@
           th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"/>
 </head>
 <body>
-
+<form method="post" th:action="@{/cv}" th:object="${generalinfo}">
 <div class="container-fluid" style="margin-top:20px">
-    <form th:action="@{confirm}" method="post">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <div class="pannel-group">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3>please do you want to conform this information</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <h5>Title</h5>
-                                </div>
-                                <div class="col-md-9">
 
-                                    <input type="text" id="title" name="title" th:value="${generalinfo.title}"
-                                           th:attr="placeholder=#{generalinfo.title}"/>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="pannel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3>please do you want to conform this information</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5>Title</h5>
+                            </div>
+                            <div class="col-md-9">
 
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <h5>summary</h5>
-                                </div>
-                                <div class="col-md-9">
-                                    <p th:text="${generalinfo.summary}"></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <h5>countrynumber</h5>
-                                </div>
-                                <div class="col-md-9">
-                                    <p th:text="${generalinfo.countrynumber}"></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <h5>Number</h5>
-                                </div>
-                                <div class="col-md-9">
-                                    <p th:text="${generalinfo.Number}"></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <h5>telephonenumber</h5>
-                                </div>
-                                <div class="col-md-9">
-                                    <p th:text="${generalinfo.countrynumber} + '' + ${generalinfo.number}" qwwwww
-                                    <xc></p>
-                                </div>
+                                <!-- <input type="text" id="title" name="title" th:value="${generalinfo.title}"
+                                        th:attr="placeholder=#{generalinfo.title}"/>
+-->
+                                <p th:text="${generalinfo.title}"></p>
+                                <input type="hidden" th:field="*{title}"/>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5>summary</h5>
+                            </div>
+                            <div class="col-md-9">
+                                <p th:text="${generalinfo.summary}"></p>
+                                <input type="hidden" th:field="*{summary}"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5>countrynumber</h5>
+                            </div>
+                            <div class="col-md-9">
+                                <p th:text="${generalinfo.countrynumber}"></p>
+                                <input type="hidden" th:field="*{countrynumber}"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5>Number</h5>
+                            </div>
+                            <div class="col-md-9">
+                                <p th:text="${generalinfo.Number}"></p>
+                                <input type="hidden" th:field="*{Number}"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5>telephonenumber</h5>
+                            </div>
+                            <div class="col-md-9">
+                                <p th:with="phonenumbers=${generalinfo.countrynumber} + '' + ${generalinfo.number}"
+                                   th:text="${phonenumbers}">
 
+                                </p>
+                                <input type="hidden" th:value="${phonenumbers}"/>
+                            </div>
 
+                        </div>
+                        <div class="container">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <!--<form method="POST" th:actio="cv">-->
+
+                                        <button type="submit" class="btn btn-primary">Confirm</button>
+                                        <!--</form>-->
+
+                                    </td>
+
+                                    <td>
+
+                                        <a href="#" th:href="@{'/index/' + ${generalinfo.general_id} + '/edit'}"
+                                           class="btn btn-primary">edit</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Confirm</button>
+
+
             </div>
         </div>
-    </form>
+
+    </div>
 </div>
+
+</form>
 
 
 </body>

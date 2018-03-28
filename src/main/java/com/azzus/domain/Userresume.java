@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
@@ -13,31 +13,32 @@ public class Userresume implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
-    @Size(min = 8)
-    @NotNull
-    private String username;
-    @NotNull
-    private String firstname;
-    @NotNull
-    private String lastname;
-    @NotNull
-    private String userEmail;
-    @NotNull
-    private String user_adress;
-    @NotNull
-    private String user_password;
 
-    public Userresume(@Size(min = 8) @NotNull String username, @NotNull String firstname, @NotNull String lastname, @NotNull String userEmail, @NotNull String user_adress, @NotNull String user_password) {
+    @NotEmpty
+    private String username;
+    @NotEmpty
+    private String firstname;
+    @NotEmpty
+    private String lastname;
+
+    @Size(min = 3)
+    private String email;
+    @Size(min = 3)
+    private String address;
+    @Size(min = 3)
+    private String password;
+
+
+    public Userresume(@NotEmpty String username, @NotEmpty String firstname, @NotEmpty String lastname, @Size(min = 3) String email, @Size(min = 3) String address, @Size(min = 3) String password) {
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
-        this.userEmail = userEmail;
-        this.user_adress = user_adress;
-        this.user_password = user_password;
+        this.email = email;
+        this.address = address;
+        this.password = password;
     }
 
     public Userresume() {
-        super();
     }
 
     public Long getUser_id() {
@@ -72,27 +73,27 @@ public class Userresume implements Serializable {
         this.lastname = lastname;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getUser_adress() {
-        return user_adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setUser_adress(String user_adress) {
-        this.user_adress = user_adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getUser_password() {
-        return user_password;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUser_password(String user_password) {
-        this.user_password = user_password;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

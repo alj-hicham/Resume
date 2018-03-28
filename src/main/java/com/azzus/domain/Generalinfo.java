@@ -13,7 +13,7 @@ public class Generalinfo implements Serializable {
     @GeneratedValue
     private long general_id;
     @NotEmpty
-    @Size(max = 10)
+    @Size(max = 25)
     private String title;
     @NotEmpty
     @Size(max = 500)
@@ -26,11 +26,10 @@ public class Generalinfo implements Serializable {
 
     private String phonenumber;
 
-
     public Generalinfo() {
     }
 
-    public Generalinfo(@NotEmpty @Size(max = 10) String title, @NotEmpty @Size(max = 500) String summary, @Size(min = 4, max = 5) String countrynumber, @Size(min = 8, max = 8) String number, @Size(min = 12, max = 13) String phonenumber) {
+    public Generalinfo(@NotEmpty @Size(max = 25) String title, @NotEmpty @Size(max = 500) String summary, @Size(min = 4, max = 5) String countrynumber, @Size(min = 9, max = 9) String number, String phonenumber) {
         this.title = title;
         this.summary = summary;
         this.countrynumber = countrynumber;
